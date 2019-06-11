@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>2d weights</title>
+</head>
+<body>
+  <script src="index.js"></script>
+  <script>
+  
+  const canvas = document.createElement('canvas')
+  const ctx = canvas.getContext('2d')
+  canvas.width = canvas.height = 800
+  document.body.appendChild(canvas)
+
+  const som = new SOM({
+    mapSize: 32,
+    vectorSize: 2
+  })
+
+  setInterval(function(){
+
+    ctx.clearRect(0,0,800,800)
+
+    const input = [
+      Math.random(),
+      Math.random()
+    ]
+
+    const { bmi } = som.compute(input)
+    som.train(input,bmi)
+
+    for(var i = 0; i < som.units.length; i++){
+      const { vector } = som.units[i]
+      const distance = som.getUnitDistance(bmi,som.units[i])
+      ctx.fillStyle = `rgba(0,0,0,${distance+0.08})`
+      ctx.fillRect(vector[0]*500,vector[1]*500,4,4)
+    }
+
+    ctx.fillStyle = `red`
+    ctx.fillRect(input[0]*500,input[1]*500,5,5)
+
+  },20)
+
+  </script>
+</body>
+</html>

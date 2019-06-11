@@ -1,0 +1,27 @@
+{
+  "name": "self-organising-map",
+  "version": "1.0.0",
+  "description": "Kohonen self organising map",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebjwallace/self-organising-map.git"
+  },
+  "keywords": [
+    "som",
+    "machine",
+    "learning",
+    "self",
+    "organising",
+    "map"
+  ],
+  "author": "Sebastian Wallace",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sebjwallace/self-organising-map/issues"
+  },
+  "homepage": "https://github.com/sebjwallace/self-organising-map#readme"
+}

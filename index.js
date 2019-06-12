@@ -21,7 +21,7 @@ class SOM {
 
     for(var x = 0; x < mapSize; x++){
       for(var y = 0; y < mapSize; y++){
-        const vector = Array.from({length: vectorSize}, Math.random)
+        const vector = Array.from({length: vectorSize},Math.random)
         this.units.push({ x, y, vector })
       }
     }
@@ -45,7 +45,8 @@ class SOM {
 
     return {
       vector: output,
-      bmi: this.units[bmi.index]
+      bmi: this.units[bmi.index],
+      bmiIndex: bmi.index
     }
 
   }

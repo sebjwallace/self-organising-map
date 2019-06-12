@@ -14,18 +14,24 @@
   document.body.appendChild(canvas)
 
   const som = new SOM({
-    mapSize: 32,
-    vectorSize: 2
+    mapSize: 5,
+    vectorSize: 2,
+    radiusShrinkRate: 500,
+    learningRate: 0.1
   })
+
+  const getRandVec = () => [
+    Math.random(),
+    Math.random()
+  ]
+
+  const points = []
 
   setInterval(function(){
 
     ctx.clearRect(0,0,800,800)
 
-    const input = [
-      Math.random(),
-      Math.random()
-    ]
+    const input = getRandVec()
 
     const { bmi } = som.compute(input)
     som.train(input,bmi)
@@ -34,14 +40,23 @@
       const { vector } = som.units[i]
       const distance = som.getUnitDistance(bmi,som.units[i])
       ctx.fillStyle = `rgba(0,0,0,${distance+0.08})`
-      ctx.fillRect(vector[0]*500,vector[1]*500,4,4)
+      ctx.fillRect(vector[0]*200,vector[1]*200,4,4)
     }
 
     ctx.fillStyle = `red`
-    ctx.fillRect(input[0]*500,input[1]*500,5,5)
+    ctx.fillRect(input[0]*200,input[1]*200,5,5)
 
-  },20)
+    for(var x = 0; x < 100; x++){
+      for(var y = 0; y < 100; y++){
+        const { bmiIndex } = som.compute([x/100,y/100])
+        ctx.fillStyle = `hsl(${parseInt((bmiIndex/som.units.length)*255)},100%,50%)`
+        ctx.fillRect(220+x,40+y,1,1)
+      }
+    }
+
+  },10)
 
   </script>
+
 </body>
 </html>
